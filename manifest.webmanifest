@@ -1,0 +1,39 @@
+{
+  "name": "PharmaCalc",
+  "short_name": "Pharma",
+  "description": "Pediatric dose and decision support for SQUH Pharmacy. Includes weight-based dosing, renal adjustment, fluids, BSA/oncology, IV-PO conversion, IV infusions, and neonatal dosing.",
+  "start_url": "/pharmacalc/",
+  "scope": "/pharmacalc/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "theme_color": "#185FA5",
+  "background_color": "#185FA5",
+  "lang": "en",
+  "categories": ["medical", "health", "productivity"],
+  "icons": [
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icon-192-maskable.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "icon-512-maskable.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}
