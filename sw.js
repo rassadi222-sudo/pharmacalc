@@ -2,7 +2,7 @@
    Provides offline support by caching the HTML shell.
    Cache name is versioned - bump on each release to force refresh. */
 
-const CACHE_NAME = 'pharmacalc-v1.9';
+const CACHE_NAME = 'pharmacalc-v1.10';
 const PRECACHE_URLS = [
   './',
   './index.html',
