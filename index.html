@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"/>
-<title>PharmaCalc v1.7 · Saeed Al Rassadi</title>
+<title>PharmaCalc v1.8 · Saeed Al Rassadi</title>
 <!-- PWA wiring (v1.7) -->
 <link rel="manifest" href="manifest.webmanifest"/>
 <meta name="theme-color" content="#185FA5"/>
@@ -223,8 +223,15 @@ html.theme-dark .seg-btn.active{background:#1c1c1e;color:#90CAF9}
 <div id="app"></div>
 <script>
 /* =====================================================
-   PharmaCalc v1.7
+   PharmaCalc v1.8
    (c) Saeed Al Rassadi, April 2026
+   v1.8 changes:
+     - Added 5 drugs: Hydrocortisone, Methylprednisolone (Emergency),
+       Captopril, Enalapril, Propranolol (Cardiovascular - new category)
+     - Total drugs: 43
+   v1.7 changes:
+     - PWA support (manifest, service worker, install prompt)
+     - Logo branding on splash and install icons
    v1.6 changes:
      - Renamed PedsCalc \u2192 PharmaCalc (umbrella platform)
      - Module picker screen with Pediatric (active) + 4 placeholders
@@ -857,10 +864,80 @@ var DRUGS=[
   WHO:{dose:"Weight-based fixed dosing as above x5 days",note:"On WHO EMLc; essential for influenza treatment - particularly important in pandemic situations."},
   Nelson:{dose:"Same weight-based fixed dosing",note:"Effective against influenza A and B including H1N1. Prophylaxis dose is same as treatment dose but once daily x10 days. Resistance can develop."}
  },
- note:"PREPARATION: Open one 75 mg capsule, dissolve in exactly 5 mL water to make 15 mg/mL. Use immediately. Start within 48h."}
+ note:"PREPARATION: Open one 75 mg capsule, dissolve in exactly 5 mL water to make 15 mg/mL. Use immediately. Start within 48h."},
+
+{name:"Hydrocortisone",generic:"",cat:"Emergency",
+ indication:"Adrenal crisis, anaphylaxis, severe asthma, croup",moa:"Glucocorticoid; suppresses inflammation and immune response; mineralocorticoid activity",
+ sideEffects:"Hyperglycaemia, hypertension, GI bleeding, growth suppression with prolonged use, immunosuppression",
+ lo:2,hi:4,max:100,freq:"Every 6h",route:"IV / IM",conc:50,concL:"100 mg vial reconstituted to 50 mg/mL",
+ refs:{
+  BNFC:{dose:"Acute adrenal crisis: 2-4 mg/kg/dose IV every 6h",note:"Initial bolus then maintenance. Neonates 4 mg/kg IV at induction, then 2 mg/kg every 6h. Max 100 mg per dose."},
+  HLL:{dose:"Status asthmaticus: 4-8 mg/kg/dose IV (max 250 mg) loading, then 2 mg/kg every 6h",note:"For severe asthma exacerbation. Switch to PO when patient improves."},
+  Taketomo:{dose:"Anti-inflammatory: 2.5-10 mg/kg/day IV/IM div every 6-8h",note:"Doses vary by indication. Anaphylaxis: 1-5 mg/kg IV. Stress dose surgery: 1-2 mg/kg IV at induction."},
+  UpToDate:{dose:"Adrenal crisis: under 1y 25 mg IM/IV bolus; 1-5y 50 mg; over 6y 100 mg, then 2 mg/kg every 6h",note:"BSPED 2023 weight/age-based emergency dosing. Maximum 100 mg per dose."},
+  ONF:{dose:"2-4 mg/kg/dose IV every 6h",note:"Listed in ONF; widely available as 100 mg vial in Oman. Reconstitute with sterile water for injection."},
+  WHO:{dose:"5 mg/kg IV/IM in adrenal crisis or severe asthma",note:"On WHO EMLc; essential medicine for paediatric emergencies."},
+  Neofax:{dose:"Neonates: 1-2 mg/kg every 8-12h IV (acute); 4 mg/kg at induction then 2 mg/kg every 6h (crisis)",note:"Avoid benzyl-alcohol-containing preparations in neonates - use preservative-free vials."}
+ },
+ note:"Do not stop abruptly after prolonged use - taper gradually. Monitor BP, blood glucose, and electrolytes during high-dose therapy."},
+
+{name:"Methylprednisolone",generic:"",cat:"Emergency",
+ indication:"Severe asthma, acute spinal cord injury, anti-inflammatory in serious illness",moa:"Synthetic glucocorticoid; potent anti-inflammatory with minimal mineralocorticoid effect",
+ sideEffects:"Hyperglycaemia, hypertension, mood changes, GI upset, immunosuppression, avascular necrosis (long-term)",
+ lo:1,hi:2,max:60,freq:"Every 6h",route:"IV / PO",conc:40,concL:"40 mg/mL Solu-Medrol vial",
+ refs:{
+  BNFC:{dose:"1-2 mg/kg/dose IV every 6h (max 60 mg/dose)",note:"For severe asthma in children unable to tolerate oral prednisolone. Switch to oral when stable."},
+  HLL:{dose:"Status asthmaticus: 1-2 mg/kg IV loading, then 0.5-1 mg/kg every 6h",note:"5x more potent than hydrocortisone, less mineralocorticoid effect. Use methylpred or prednisolone."},
+  Taketomo:{dose:"Anti-inflammatory: 0.5-1.7 mg/kg/day IV/PO div every 6-12h",note:"Asthma: pulse 1-2 mg/kg IV every 6h. PALS doses for SCI not currently recommended (NASCIS controversy)."},
+  UpToDate:{dose:"Severe asthma: 1-2 mg/kg IV/IM every 6h",note:"Equivalent oral prednisolone usually preferred. IV reserved for inability to tolerate oral or critically ill."},
+  ONF:{dose:"1-2 mg/kg/dose IV every 6h",note:"Available in Oman as 40 mg and 125 mg vials. Reconstitute with provided diluent."},
+  WHO:{dose:"Severe inflammatory conditions: 1-2 mg/kg IV every 6h",note:"On WHO EMLc; alternative to hydrocortisone when less mineralocorticoid effect needed."}
+ },
+ note:"Approximately 5x more potent than hydrocortisone (4 mg methylpred = 20 mg hydrocortisone). Taper after prolonged use."},
+
+{name:"Captopril",generic:"",cat:"Cardiovascular",
+ indication:"Heart failure, hypertension, post-MI in older children",moa:"ACE inhibitor; reduces angiotensin II, lowers afterload and BP",
+ sideEffects:"Hypotension (especially first dose), hyperkalaemia, dry cough, angioedema, renal impairment, neutropenia",
+ lo:0.1,hi:0.5,max:50,freq:"Every 8h (TDS)",route:"PO",conc:1,concL:"1 mg/mL extemporaneous suspension",
+ refs:{
+  BNFC:{dose:"Neonates: 10-50 mcg/kg every 8-12h. Children: 100-500 mcg/kg every 8h",note:"Start low and titrate. Test dose strongly recommended in neonates due to severe first-dose hypotension."},
+  HLL:{dose:"Neonates: 0.05-0.5 mg/kg/dose every 8-24h. Infants: 0.15-0.3 mg/kg every 8h",note:"Maximum infant dose 6 mg/kg/day. Older children: max 50 mg/dose, 450 mg/day."},
+  Taketomo:{dose:"Neonates: 0.01-0.05 mg/kg/dose every 8-24h initially, titrate to 0.05-0.5 mg/kg",note:"Onset 15 min PO, peak 1h. Half-life longer in neonates. Monitor renal function and potassium."},
+  UpToDate:{dose:"Children: initial 0.1 mg/kg every 8h; titrate to 0.5-1 mg/kg/dose every 8h",note:"Test dose mandatory: monitor BP for 4h after first dose. Hold for SBP drop over 20%."},
+  ONF:{dose:"0.1-0.5 mg/kg/dose every 8h",note:"Listed in ONF. 25 mg tablets available; suspension is extemporaneous (1 mg/mL) - check pharmacy preparation."},
+  Neofax:{dose:"Neonates: 0.01-0.05 mg/kg/dose every 8-12h, max 0.5 mg/kg/dose",note:"FIRST-DOSE HYPOTENSION risk - admit for monitoring. Hold dose if SBP under 50 mmHg or sCr rises 50%."}
+ },
+ note:"NEONATAL CAUTION: severe first-dose hypotension, especially with hypovolaemia or diuretics. Always start at the lowest dose. Monitor BP, K+, and renal function."},
+
+{name:"Enalapril",generic:"",cat:"Cardiovascular",
+ indication:"Heart failure, hypertension in older children (over 1 month)",moa:"ACE inhibitor prodrug; converted to enalaprilat; lowers afterload and BP",
+ sideEffects:"Hypotension, hyperkalaemia, cough, angioedema, renal impairment, fetal toxicity if pregnant",
+ lo:0.08,hi:0.5,max:40,freq:"Once daily or BD",route:"PO",conc:1,concL:"1 mg/mL extemporaneous suspension",
+ refs:{
+  BNFC:{dose:"Children: 100-500 mcg/kg once daily, increase to 500 mcg/kg-1 mg/kg/day max 40 mg/day",note:"Once-daily dosing convenient vs captopril TDS. Start low, double dose every 1-2 weeks if tolerated."},
+  HLL:{dose:"Initial 0.08 mg/kg/day (max 5 mg) once daily; titrate up to 0.5 mg/kg/day",note:"Doses divided BD if BP fluctuates with once-daily. Monitor renal function and K+ at each titration."},
+  Taketomo:{dose:"Initial 0.1 mg/kg/dose once daily; max 0.5 mg/kg/dose or 40 mg/day",note:"Longer acting than captopril (half-life 11h). Use once daily for compliance, BD if needed."},
+  UpToDate:{dose:"Hypertension: 0.08 mg/kg (max 5 mg) once daily, titrate to 0.6 mg/kg/day max 40 mg/day",note:"Children over 1 month only. Avoid in renal artery stenosis, hyperkalaemia, pregnancy."},
+  ONF:{dose:"0.08-0.5 mg/kg/day once daily",note:"Available in Oman as 5 mg, 10 mg, 20 mg tablets. Suspension is extemporaneous - confirm with pharmacy."}
+ },
+ note:"Avoid in neonates - captopril preferred under 1 month due to better titratability. Stop ACE inhibitors if pregnancy possible (fetal renal toxicity)."},
+
+{name:"Propranolol",generic:"",cat:"Cardiovascular",
+ indication:"SVT, hypertension, infantile haemangioma, thyroid storm, migraine prophylaxis",moa:"Non-selective beta-blocker; reduces heart rate, contractility, BP",
+ sideEffects:"Bradycardia, hypotension, hypoglycaemia (especially neonates), bronchospasm, fatigue, sleep disturbance",
+ lo:0.25,hi:2,max:80,freq:"Every 6-8h (varies by indication)",route:"PO / IV",conc:1,concL:"PO: 5 mg/5 mL syrup. IV: 1 mg/mL undiluted",
+ refs:{
+  BNFC:{dose:"SVT/HTN PO: 0.25-1 mg/kg every 6-8h. Haemangioma: 1-3 mg/kg/day div BD. IV SVT: 0.025-0.05 mg/kg slow IV",note:"Different dosing for different indications - confirm intended use. Start low and titrate."},
+  HLL:{dose:"Arrhythmia PO: 1-4 mg/kg/day div every 6h. IV: 0.01-0.1 mg/kg slow over 10 min, max 1 mg",note:"Maximum oral 16 mg/kg/day or 60 mg/day, whichever is less."},
+  Taketomo:{dose:"Haemangioma: 1 mg/kg/day div BD initially, increase to 2 mg/kg/day after 1 week, max 3 mg/kg/day",note:"Take with feeds to reduce hypoglycaemia risk. Monitor HR for first 2h after first dose."},
+  UpToDate:{dose:"Infantile haemangioma: 1 mg/kg/day div BD, titrate to 2-3 mg/kg/day. SVT: 0.5-1 mg/kg every 6h",note:"For haemangioma: ECG and HR baseline before initiation. Check glucose if patient becomes unwell."},
+  ONF:{dose:"0.25-1 mg/kg/dose every 6-8h",note:"Available in Oman as 10 mg, 40 mg tablets. Suspension extemporaneous (5 mg/5 mL). 1 mg/mL IV ampoule."},
+  Neofax:{dose:"SVT in neonates: 0.25 mg/kg/dose PO every 6h, titrate up to 3.5 mg/kg/dose",note:"NEONATAL HYPOGLYCAEMIA - check glucose before each dose initially. Avoid in cardiogenic shock."}
+ },
+ note:"DOSE VARIES BY INDICATION: SVT/HTN ~0.5-1 mg/kg/dose; haemangioma 1-3 mg/kg/day div BD. Always check intended use. Avoid in asthma, heart block, cardiogenic shock."}
 ];
 /* === HELPERS (unchanged from v1.3) === */
-var CC={"Analgesics & Antipyretics":{bg:"#E6F1FB",tx:"#0C447C"},"Antibiotics":{bg:"#E1F5EE",tx:"#085041"},"Emergency":{bg:"#FCEBEB",tx:"#791F1F"},"Respiratory":{bg:"#EAF3DE",tx:"#27500A"},"Seizures / CNS":{bg:"#EEEDFE",tx:"#3C3489"},"GI":{bg:"#FAEEDA",tx:"#633806"},"Antihistamines":{bg:"#FBE9E7",tx:"#BF360C"},"Antivirals & Antifungals":{bg:"#E0F2F1",tx:"#004D40"}};
+var CC={"Analgesics & Antipyretics":{bg:"#E6F1FB",tx:"#0C447C"},"Antibiotics":{bg:"#E1F5EE",tx:"#085041"},"Emergency":{bg:"#FCEBEB",tx:"#791F1F"},"Respiratory":{bg:"#EAF3DE",tx:"#27500A"},"Seizures / CNS":{bg:"#EEEDFE",tx:"#3C3489"},"GI":{bg:"#FAEEDA",tx:"#633806"},"Antihistamines":{bg:"#FBE9E7",tx:"#BF360C"},"Antivirals & Antifungals":{bg:"#E0F2F1",tx:"#004D40"},"Cardiovascular":{bg:"#FFF4E5",tx:"#7A4A00"}};
 
 var CONC_BY_ROUTE={
   "Paracetamol":{"PO":{c:24,l:"120 mg/5 mL syrup"},"IV":{c:10,l:"10 mg/mL (1 g/100 mL bag)"},"PR":{c:0,l:"Suppository - select nearest size (60 mg, 125 mg, 250 mg, 500 mg)"}},
@@ -960,7 +1037,7 @@ function splashHTML(){
   '</div>'+
   '<button class="splash-btn" id="btn-start">Get Started</button>'+
   '<div class="splash-ver">'+
-  '<span style="font-size:11px;color:rgba(255,255,255,0.25)">Version 1.7 - Clinical decision support only</span>'+
+  '<span style="font-size:11px;color:rgba(255,255,255,0.25)">Version 1.8 - Clinical decision support only</span>'+
   '<span style="font-size:10px;color:rgba(255,255,255,0.65);margin-top:2px">This month\'s code: <strong style="color:#fff;letter-spacing:1px">'+getMonthlyCode()+'</strong></span>'+
   '<a href="mailto:rassadi222@gmail.com" style="font-size:11px;color:rgba(255,255,255,0.35);text-decoration:none">&#169; Saeed Al Rassadi, April 2026</a>'+
   '</div></div>';
@@ -1082,7 +1159,7 @@ function homeHTML(){
   '<p style="font-size:14px;font-weight:700;color:#185FA5;letter-spacing:1.5px">'+getMonthlyCode()+'</p>'+
   '<p style="font-size:10px;color:#bbb;margin-top:3px">Auto-rotates monthly. Share with team as needed.</p>'+
   '</div>'+
-  '<div class="footer">&#169; Saeed Al Rassadi, April 2026 - PharmaCalc v1.7 - For clinical decision support only</div>'+
+  '<div class="footer">&#169; Saeed Al Rassadi, April 2026 - PharmaCalc v1.8 - For clinical decision support only</div>'+
   '</div></div>';
 }
 
@@ -1192,7 +1269,7 @@ function resultHTML(){
   '<p style="font-size:12px;color:#aaa;margin-bottom:5px">Found an error or have a suggestion?</p>'+
   '<button id="btn-go-feedback-res" style="font-size:13px;color:#185FA5;font-weight:600;background:none;border:none;cursor:pointer;font-family:inherit;padding:0">Send feedback &#8594;</button>'+
   '</div>'+
-  '<div class="footer">&#169; Saeed Al Rassadi, April 2026 - PharmaCalc v1.7</div>'+
+  '<div class="footer">&#169; Saeed Al Rassadi, April 2026 - PharmaCalc v1.8</div>'+
   '</div></div>';
 }
 
@@ -1250,7 +1327,7 @@ function feedbackHTML(){
   '<p style="font-size:12px;color:#aaa;margin-bottom:4px">Or email directly</p>'+
   '<a href="mailto:rassadi222@gmail.com?subject=PharmaCalc Feedback" style="font-size:13px;color:#185FA5;font-weight:600;text-decoration:none">rassadi222@gmail.com</a>'+
   '</div>'+
-  '<div class="footer">&#169; Saeed Al Rassadi, April 2026 - PharmaCalc v1.7</div>'+
+  '<div class="footer">&#169; Saeed Al Rassadi, April 2026 - PharmaCalc v1.8</div>'+
   '</div></div>';
 }
 
@@ -1422,7 +1499,7 @@ function renalHTML(){
   '</div>'+
   resultHTML+
   '<div class="warn" style="margin-bottom:.85rem">CrCl estimates are approximations. Always use clinical judgment and TDM for critical drugs. Values may be less accurate in neonates, severe malnutrition, or acute kidney injury.</div>'+
-  '<div class="footer">&#169; Saeed Al Rassadi, April 2026 - PharmaCalc v1.7</div>'+
+  '<div class="footer">&#169; Saeed Al Rassadi, April 2026 - PharmaCalc v1.8</div>'+
   '</div></div>';
 }
 
@@ -1508,7 +1585,7 @@ function fluidsHTML(){
   '<span style="color:#aaa">Ref: Holliday MA, Segar WE. Pediatrics 1957;19(5):823-32</span>'+
   '</div></div>'+
   '<div class="warn" style="margin-top:.85rem"><strong>Restrict fluids</strong> in heart failure, SIADH, raised ICP, renal failure, or post-operative period. Use <strong>isotonic</strong> maintenance fluids (e.g., 0.9% NaCl + 5% dextrose) - NICE 2015 / NHS Improvement guidance. Hypotonic fluids increase hyponatraemia risk.</div>'+
-  '<div class="footer">&#169; Saeed Al Rassadi, April 2026 - PharmaCalc v1.7</div>'+
+  '<div class="footer">&#169; Saeed Al Rassadi, April 2026 - PharmaCalc v1.8</div>'+
   '</div></div>';
 }
 
@@ -1613,7 +1690,7 @@ function bsaHTML(){
   'BSA (m\u00b2) = \u221a (height [cm] \u00d7 weight [kg] / 3600)<br>'+
   '<span style="color:#aaa">Ref: Mosteller RD. N Engl J Med 1987;317(17):1098. Most widely used paediatric formula; closely matches Du Bois.</span>'+
   '</div></div>'+
-  '<div class="footer">&#169; Saeed Al Rassadi, April 2026 - PharmaCalc v1.7</div>'+
+  '<div class="footer">&#169; Saeed Al Rassadi, April 2026 - PharmaCalc v1.8</div>'+
   '</div></div>';
 }
 
@@ -1674,7 +1751,7 @@ function ivpoHTML(){
   '<span class="pill" style="background:#fff0f0;color:#8b1a1a">low &lt; 50%</span></div>'+
   rows+'</div>'+
   '<div class="warn" style="margin-top:.85rem">Always verify the proposed switch against current local antimicrobial guidelines and the patient\'s clinical trajectory. Reduces line-related infections, hospital length of stay, and cost. Avoid switching in deep-seated or CNS infections.</div>'+
-  '<div class="footer">&#169; Saeed Al Rassadi, April 2026 - PharmaCalc v1.7</div>'+
+  '<div class="footer">&#169; Saeed Al Rassadi, April 2026 - PharmaCalc v1.8</div>'+
   '</div></div>';
 }
 
@@ -1811,7 +1888,7 @@ function infusionHTML(){
   calcBox+
   '<div class="warn" style="margin-top:.85rem">'+d.note+'</div>'+
   '<div class="warn"><strong>Always double-check infusion calculations independently</strong> before starting. Verify pump settings, drug concentration, and patient weight. Use central line for vasoactive drugs where possible.</div>'+
-  '<div class="footer">&#169; Saeed Al Rassadi, April 2026 - PharmaCalc v1.7</div>'+
+  '<div class="footer">&#169; Saeed Al Rassadi, April 2026 - PharmaCalc v1.8</div>'+
   '</div></div>';
 }
 
@@ -1980,7 +2057,7 @@ function neonatalHTML(){
   '</div>'+
   matrixRows+
   '</div>'+
-  '<div class="footer">&#169; Saeed Al Rassadi, April 2026 - PharmaCalc v1.7</div>'+
+  '<div class="footer">&#169; Saeed Al Rassadi, April 2026 - PharmaCalc v1.8</div>'+
   '</div></div>';
 }
 
@@ -2071,7 +2148,7 @@ function settingsHTML(){
   /* Credits */
   '<div class="card"><div class="card-label">Credits</div>'+
   '<div style="font-size:13px;color:#444;line-height:1.9">'+
-  '<div style="display:flex;justify-content:space-between"><span style="color:#888">Version</span><strong>1.7 (PWA enabled)</strong></div>'+
+  '<div style="display:flex;justify-content:space-between"><span style="color:#888">Version</span><strong>1.8 (5 cardiovascular drugs)</strong></div>'+
   '<div style="display:flex;justify-content:space-between"><span style="color:#888">Built by</span><strong>Saeed Al Rassadi</strong></div>'+
   '<div style="display:flex;justify-content:space-between"><span style="color:#888">For</span><strong>SQUH Pharmacy Department</strong></div>'+
   '<div style="display:flex;justify-content:space-between"><span style="color:#888">Released</span><strong>April 2026</strong></div>'+
@@ -2091,7 +2168,7 @@ function settingsHTML(){
   '&bull; <strong>Nelson</strong> - Textbook of Pediatrics'+
   '</div></div>'+
 
-  '<div class="footer">&#169; Saeed Al Rassadi, April 2026 - PharmaCalc v1.7</div>'+
+  '<div class="footer">&#169; Saeed Al Rassadi, April 2026 - PharmaCalc v1.8</div>'+
   '</div></div>';
 }
 
@@ -2125,7 +2202,7 @@ function modulesHTML(){
   '<div style="flex:1;text-align:center">'+
   '<h1 style="font-size:26px;font-weight:700;letter-spacing:-0.5px">PharmaCalc</h1>'+
   '<p style="font-size:11px;color:#aaa;margin-top:3px">SQUH Pharmacy Department</p></div>'+
-  '<span style="font-size:10px;font-weight:600;color:#aaa;background:#e8f2f0;padding:3px 9px;border-radius:20px;flex-shrink:0">v1.7</span>'+
+  '<span style="font-size:10px;font-weight:600;color:#aaa;background:#e8f2f0;padding:3px 9px;border-radius:20px;flex-shrink:0">v1.8</span>'+
   '</div></div></div>'+
   '<div class="wrap">'+
   '<div class="card" style="text-align:center;padding:1.25rem 1rem">'+
@@ -2136,7 +2213,7 @@ function modulesHTML(){
   pedTile+
   phHTML+
   '</div>'+
-  '<div class="footer">&#169; Saeed Al Rassadi, April 2026 - PharmaCalc v1.7</div>'+
+  '<div class="footer">&#169; Saeed Al Rassadi, April 2026 - PharmaCalc v1.8</div>'+
   '</div></div>';
 }
 
@@ -2442,7 +2519,7 @@ function bindEvents(){
       var drug=drugEl?drugEl.value:'';
       var typeLabel=state.fbType==='error'?'Drug Error Report':state.fbType==='missing'?'Missing Drug Request':'General Suggestion';
       var drugLine=drug?('Drug: '+drug+'\n'):'';
-      var body=encodeURIComponent('PharmaCalc Feedback\nType: '+typeLabel+'\n'+drugLine+'\n'+msg+'\n\n- Sent from PharmaCalc v1.7');
+      var body=encodeURIComponent('PharmaCalc Feedback\nType: '+typeLabel+'\n'+drugLine+'\n'+msg+'\n\n- Sent from PharmaCalc v1.8');
       var subject=encodeURIComponent('PharmaCalc - '+typeLabel);
       window.location.href='mailto:rassadi222@gmail.com?subject='+subject+'&body='+body;
       trackEvent('Feedback','submit',state.fbType);
