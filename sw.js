@@ -2,13 +2,17 @@
    Provides offline support by caching the HTML shell.
    Cache name is versioned - bump on each release to force refresh. */
 
-const CACHE_NAME = 'pharmacalc-v1.7';
+const CACHE_NAME = 'pharmacalc-v1.8';
 const PRECACHE_URLS = [
   './',
-  './index.html',
+  './pharmacalc-v1.8.html',
   './manifest.webmanifest',
   './icon-192.png',
-  './icon-512.png'
+  './icon-512.png',
+  './icon-192-maskable.png',
+  './icon-512-maskable.png',
+  './apple-touch-icon.png',
+  './splash-logo.png'
 ];
 
 /* Install: precache the shell */
@@ -59,7 +63,7 @@ self.addEventListener('fetch', function(event) {
         return res;
       }).catch(function() {
         return caches.match(req).then(function(hit) {
-          return hit || caches.match('./index.html') || caches.match('./');
+          return hit || caches.match('./pharmacalc-v1.8.html') || caches.match('./');
         });
       })
     );
