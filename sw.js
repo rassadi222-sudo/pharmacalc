@@ -52,7 +52,7 @@ self.addEventListener('fetch', function(event) {
   if (url.origin !== self.location.origin) return;
 
   const isHTML = req.mode === 'navigate' ||
-                 req.headers.get('Accept').indexOf('text/html') >= 0;
+                 (req.headers.get('Accept') || '').indexOf('text/html') >= 0;
 
   if (isHTML) {
     /* Network-first: try fresh, fall back to cache */

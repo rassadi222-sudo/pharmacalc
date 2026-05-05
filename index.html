@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"/>
-<title>PharmaCalc v1.34 · Saeed Al Rassadi</title>
+<title>PharmaCalc v1.34.1 · Saeed Al Rassadi</title>
 <!-- PWA wiring (v1.7) -->
 <link rel="manifest" href="manifest.webmanifest"/>
 <meta name="theme-color" content="#185FA5"/>
@@ -258,7 +258,7 @@ html.theme-dark .seg-btn.active{background:#1c1c1e;color:#90CAF9}
 <div id="app"></div>
 <script>
 /* =====================================================
-   PharmaCalc v1.34
+   PharmaCalc v1.34.1 (HOTFIX)
    (c) Saeed Al Rassadi, May 2026
    v1.34 changes (Master List integration - structural):
      - All 48 new drugs from v1.31, v1.32, v1.33 now integrated
@@ -953,7 +953,7 @@ var DRUGS=[
 {name:"Dextrose 10%",generic:"Hypoglycaemia",cat:"Emergency",
  indication:"Acute hypoglycaemia (blood glucose under 2.6 mmol/L)",moa:"Provides rapidly available glucose substrate to restore blood glucose levels",
  sideEffects:"Hyperglycaemia, hyperosmolarity, phlebitis (higher concentrations), fluid overload",
- lo:2,hi:5,max:200,freq:"Once, recheck glucose after 15 min",route:"IV",conc:100,concL:"100 mg/mL (10%)",
+ lo:200,hi:500,max:25000,freq:"Once, recheck glucose after 15 min",route:"IV",conc:100,concL:"100 mg/mL (10%)",
  refs:{
   BNFC:{dose:"2 mL/kg of 10% glucose IV",note:"Use 10% in all children; 25-50% concentrations are venotoxic and should be avoided."},
   HLL:{dose:"0.5-1 g/kg IV",note:"Recheck glucose 15-20 min after bolus; start maintenance dextrose infusion to prevent recurrence."},
@@ -1615,7 +1615,7 @@ var DRUGS=[
 {name:"Vigabatrin",generic:"Sabril",cat:"Anticonvulsants",
  indication:"FIRST-LINE for infantile spasms (West syndrome) - especially in tuberous sclerosis. Refractory focal seizures (adjunct). Rare CDKL5-related epilepsy",moa:"Irreversible inhibitor of GABA transaminase, raising brain GABA levels",
  sideEffects:"PERMANENT VISUAL FIELD CONSTRICTION (peripheral vision loss in 30-50% of long-term users; irreversible). MRI white matter signal changes (usually asymptomatic). Drowsiness, weight gain, behavioural disturbance, mood disorder",
- lo:30,hi:150,max:3000,freq:"Once or twice daily (OD-BD)",route:"PO",conc:100,concL:"Sachets 500 mg powder (dissolve in water); tablets 500 mg",
+ lo:15,hi:75,max:1500,freq:"Every 12h (BD); titrate slowly per indication",route:"PO",conc:100,concL:"Sachets 500 mg powder (dissolve in water); tablets 500 mg",
  refs:{
   BNFC:{dose:"Infantile spasms (1 mo-2y): start 50 mg/kg/day div BD, titrate to 100-150 mg/kg/day if needed. Focal seizures (children): 30-40 mg/kg/day div BD, titrate to 80-100 mg/kg/day; max 3 g/day",note:"For infantile spasms response usually within 2 weeks - if no response by 12 weeks, withdraw. Tuberous sclerosis: first-line."},
   HLL:{dose:"As BNFC - higher doses for infantile spasms (100-150 mg/kg/day) than for focal epilepsy",note:"Treatment course typically 6 months for infantile spasms then taper. Visual field testing every 6 months in patients >9y; in younger children, tonometry / visual evoked potentials."},
@@ -1697,7 +1697,7 @@ var DRUGS=[
 {name:"Sucralfate",generic:"",cat:"GI",
  indication:"Peptic ulcer, stress ulcer prophylaxis, prevention of upper GI bleeding (NSAID-induced)",moa:"Forms protective barrier on ulcerated mucosa; stimulates prostaglandin production",
  sideEffects:"Constipation (most common), aluminium accumulation in renal failure, drug binding (reduces absorption of others)",
- lo:40,hi:80,max:1000,freq:"Every 6h (QDS)",route:"PO",conc:200,concL:"Suspension 200 mg/mL; tablets 1 g",
+ lo:10,hi:20,max:1000,freq:"Every 6h (QDS)",route:"PO",conc:200,concL:"Suspension 200 mg/mL; tablets 1 g",
  refs:{
   BNFC:{dose:"Children: 40-80 mg/kg/day PO div every 6h; max 4 g/day",note:"Take 1h before meals on empty stomach. Separate from other oral drugs by at least 2h (binds and reduces absorption)."},
   HLL:{dose:"Children 40-80 mg/kg/day PO div QDS; max 1 g/dose",note:"Useful when PPI contraindicated. Local-acting only - minimal systemic absorption."},
@@ -2471,7 +2471,7 @@ var DRUGS=[
 {name:"Carbimazole",generic:"Neo-Mercazole",cat:"Endocrine",
  indication:"Hyperthyroidism (Graves disease, toxic multinodular goitre, thyroid storm) - first-line antithyroid in paeds in most jurisdictions",moa:"Prodrug for methimazole; inhibits thyroid peroxidase blocking T4/T3 synthesis. Does NOT inhibit T4-to-T3 conversion (unlike PTU)",
  sideEffects:"AGRANULOCYTOSIS (rare but life-threatening - 0.1-0.5%, usually first 3 months; emergency FBC if fever/sore throat/oral ulcers), rash (5-10%, usually mild), arthralgia, pruritus, GI upset, hepatotoxicity (cholestatic, less than PTU), aplastic anaemia (very rare). Crosses placenta - aplasia cutis (scalp defect) reported with first-trimester use",
- lo:0.25,hi:0.75,max:30,freq:"Every 8-12h initially, OD maintenance",route:"PO",conc:1,concL:"Tablets 5/10/20 mg; suspension 1 mg/mL extemporaneous",
+ lo:0.125,hi:0.375,max:15,freq:"Every 12h (BD) initial; titrate to OD maintenance per TFTs",route:"PO",conc:1,concL:"Tablets 5/10/20 mg; suspension 1 mg/mL extemporaneous",
  refs:{
   BNFC:{dose:"Children >1y: initial 0.25-0.75 mg/kg/day div BD-TDS, max 30 mg/day. Maintenance 0.1-0.4 mg/kg/day (titrate by TFTs). Block-replace regimen alternative: continue 30 mg/day + add levothyroxine once euthyroid",note:"FIRST-LINE in paeds. PTU is now reserved for first trimester pregnancy and thyroid storm due to hepatotoxicity (FDA black-box, paeds particularly susceptible)."},
   HLL:{dose:"As BNFC. Treatment course typically 18-24 months; remission rate ~30%, often need second course or definitive treatment",note:"WARN ALL PATIENTS / FAMILIES: emergency FBC if fever, sore throat, oral ulcers - agranulocytosis can be fatal if missed. Stop drug immediately and check FBC."},
@@ -2794,7 +2794,7 @@ var DRUGS=[
 {name:"Tetracycline",generic:"",cat:"Antibiotics",class:"tetracycline",
  indication:"Severe acne (older adolescents), chlamydia (alternative), brucellosis (Middle East relevance), rickettsial infections, malaria adjunct (selected travel/regional), rosacea. LARGELY REPLACED by doxycycline (longer half-life, better bioavailability, lower GI side effects)",moa:"Tetracycline antibiotic - same mechanism as doxycycline (inhibits 30S ribosome). Shorter half-life (~8h) requires QDS dosing - inferior to doxycycline in most situations",
  sideEffects:"Same as doxycycline: PHOTOSENSITIVITY (severe), TOOTH STAINING (permanent in <8y - generally CONTRAINDICATED <8y), GI upset (more than doxycycline), oesophagitis, hepatotoxicity (rare with short courses), benign intracranial hypertension",
- lo:25,hi:50,max:500,freq:"Every 6h (QDS)",route:"PO",conc:25,concL:"Capsules 250/500 mg; suspension 125 mg/5 mL (25 mg/mL)",
+ lo:6.25,hi:12.5,max:500,freq:"Every 6h (QDS)",route:"PO",conc:25,concL:"Capsules 250/500 mg; suspension 125 mg/5 mL (25 mg/mL)",
  refs:{
   BNFC:{dose:"Children >12y: 250-500 mg q6h. >8y in life-threatening infection: 25-50 mg/kg/day div q6h, max 2 g/day. Acne: 250-500 mg BD x 6-12 weeks",note:"GENERALLY AVOID <8y - tooth staining. <12y reserve for severe infections without alternative. Doxycycline preferred (less staining concern, longer half-life)."},
   HLL:{dose:"As BNFC. Adolescent acne: 250 mg BD initially, max 1 g/day. Brucellosis: doxycycline preferred (more convenient dosing)",note:"Take 1h before food or 2h after - food significantly reduces absorption (more so than doxycycline). Avoid dairy/iron/calcium/antacids - separate by 2h."},
@@ -2984,7 +2984,7 @@ showDrugList:false};
 })();
 
 function getCR(name,route){return(CONC_BY_ROUTE[name]&&CONC_BY_ROUTE[name][route])||null;}
-function getWt(){return parseFloat(state.wtConfirmed)||0;}
+function getWt(){var w=parseFloat(state.wtConfirmed);return(w>0&&isFinite(w))?w:0;}
 function getRoutes(rs){
   if(rs.toLowerCase().indexOf('nebuliz')>=0) return['Nebulized'];
   var out=[];
@@ -3180,7 +3180,7 @@ function homeHTML(){
   '<p style="font-size:14px;font-weight:700;color:#185FA5;letter-spacing:1.5px">'+getMonthlyCode()+'</p>'+
   '<p style="font-size:10px;color:#bbb;margin-top:3px">Auto-rotates monthly. Share with team as needed.</p>'+
   '</div>'+
-  '<div class="footer">&#169; Saeed Al Rassadi, April 2026 - PharmaCalc v1.34 - For clinical decision support only</div>'+
+  '<div class="footer">&#169; Saeed Al Rassadi, May 2026 - PharmaCalc v1.34.1 - For clinical decision support only</div>'+
   '</div></div>';
 }
 
@@ -3375,7 +3375,7 @@ function allDrugsHTML(){
   '</div>'+
   (state.cat!=='All'?'<div style="font-size:11px;color:#888;margin-bottom:.5rem">Filtered by: <strong>'+state.cat+'</strong> '+clearBtn+'</div>':clearBtn)+
   '<div class="drug-list">'+rows+'</div>'+
-  '<div class="footer">&#169; Saeed Al Rassadi, April 2026 - PharmaCalc v1.34</div>'+
+  '<div class="footer">&#169; Saeed Al Rassadi, May 2026 - PharmaCalc v1.34.1</div>'+
   '</div></div>';
 }
 
@@ -3405,7 +3405,7 @@ function allCatsHTML(){
   '</div></div>'+
   '<div class="wrap">'+
   '<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:.85rem">'+cards+'</div>'+
-  '<div class="footer">&#169; Saeed Al Rassadi, April 2026 - PharmaCalc v1.34</div>'+
+  '<div class="footer">&#169; Saeed Al Rassadi, May 2026 - PharmaCalc v1.34.1</div>'+
   '</div></div>';
 }
 
@@ -3438,13 +3438,25 @@ function allRefsHTML(){
   '</div></div>'+
   '<div class="wrap">'+
   blocks+
-  '<div class="footer">&#169; Saeed Al Rassadi, April 2026 - PharmaCalc v1.34</div>'+
+  '<div class="footer">&#169; Saeed Al Rassadi, May 2026 - PharmaCalc v1.34.1</div>'+
   '</div></div>';
 }
 
 /* v1.16: Changelog screen */
 function changelogHTML(){
   var entries=[
+    {v:'1.34.1',d:'May 2026 (HOTFIX)',c:[
+      'CRITICAL: Dextrose 10% dose corrected. Previous lo=2/hi=5 were stored as mg/kg but the author intended them as mL/kg of 10% solution (~100x under-dose). Now correctly encoded as lo=200/hi=500 mg/kg with max=25,000 mg cap. Calc now matches BNFC (2 mL/kg), ONF (2-5 mL/kg), WHO (5 mL/kg), and Neofax (2 mL/kg = 200 mg/kg).',
+      'HIGH: Sucralfate per-dose value corrected. Refs (BNFC, HLL, Taketomo) state 40-80 mg/kg/DAY div QDS, but app stored 40-80 as per-dose (4x over-dose at full freq). Now lo=10, hi=20 per dose at QDS.',
+      'HIGH: Tetracycline per-dose value corrected. Refs state 25-50 mg/kg/DAY div QDS, but app stored 25-50 as per-dose (4x over-dose). Now lo=6.25, hi=12.5 per dose at QDS.',
+      'HIGH: Vigabatrin per-dose value corrected. BNFC range 30-150 mg/kg/DAY div BD, but app stored as per-dose with OD-BD freq (up to 2x over-dose at BD). Now lo=15, hi=75 per dose at BD with explicit titration freq string.',
+      'HIGH: Carbimazole per-dose value corrected. BNFC initial 0.25-0.75 mg/kg/DAY div BD-TDS, but app stored as per-dose (up to 3x over-dose). Now lo=0.125, hi=0.375 per dose at BD initial regimen with titrate-to-OD-maintenance freq string.',
+      'No new drugs; no other dose changes; no calculator logic changes - data-only hotfix.',
+      'CODE: Defensive fix - dose calc no longer zeros out when a drug has max=0 (latent bug; no exposure with current data, but max=0 is now correctly treated as "no cap").',
+      'CODE: Defensive fix - getWt() rejects negative, NaN, and Infinity weight values (returns 0). Previously a typed negative weight produced negative doses.',
+      'CODE: Service worker hardened against requests with missing Accept header (was a 1-line null-deref risk).',
+      'Drug count unchanged: 163. Structural unchanged.'
+    ]},
     {v:'1.34',d:'May 2026',c:[
       'STRUCTURAL: Master List integration complete - every drug now browsable by pharmacological class',
       '3 new master classes added (15 -> 18): Vitamins & Supplements, Endocrine, Anaesthesia / Sedation',
@@ -3687,7 +3699,7 @@ function changelogHTML(){
   '</div></div>'+
   '<div class="wrap">'+
   blocks+
-  '<div class="footer">&#169; Saeed Al Rassadi, April 2026 - PharmaCalc v1.34</div>'+
+  '<div class="footer">&#169; Saeed Al Rassadi, May 2026 - PharmaCalc v1.34.1</div>'+
   '</div></div>';
 }
 
@@ -3739,7 +3751,7 @@ function historyHTML(){
     '<div class="hist-list">'+listHTML+'</div>'+
     clearBtn+
     '<div style="font-size:11px;color:#aaa;text-align:center;line-height:1.6;margin-top:.5rem;margin-bottom:.85rem">Stored only on this device. Not shared. Tap Clear when finishing your shift if needed.</div>'+
-    '<div class="footer">&#169; Saeed Al Rassadi, May 2026 - PharmaCalc v1.34</div>'+
+    '<div class="footer">&#169; Saeed Al Rassadi, May 2026 - PharmaCalc v1.34.1</div>'+
     '</div></div>';
 }
 
@@ -3751,9 +3763,9 @@ function resultHTML(){
   var isSingle=d.lo===d.hi;
   var c=CC[d.cat]||{};
   var tMin=wt*d.lo, tMax=wt*d.hi;
-  var cMin=Math.min(tMin,d.max), cMax=Math.min(tMax,d.max);
+  var cMin=d.max>0?Math.min(tMin,d.max):tMin, cMax=d.max>0?Math.min(tMax,d.max):tMax;
   var vMin=conc>0?cMin/conc:0, vMax=conc>0?cMax/conc:0;
-  var isCapped=tMin>d.max||tMax>d.max;
+  var isCapped=d.max>0&&(tMin>d.max||tMax>d.max);
   var doseStr=isSingle?(''+d.lo):(d.lo+'-'+d.hi);
   // v1.14: dynamic precision - more decimals for small mg doses (e.g. digoxin)
   var dPrecision=cMax<1?3:(cMax<10?2:1);
@@ -3882,7 +3894,7 @@ function resultHTML(){
   '<p style="font-size:12px;color:#aaa;margin-bottom:5px">Found an error or have a suggestion?</p>'+
   '<button id="btn-go-feedback-res" style="font-size:13px;color:#185FA5;font-weight:600;background:none;border:none;cursor:pointer;font-family:inherit;padding:0">Send feedback &#8594;</button>'+
   '</div>'+
-  '<div class="footer">&#169; Saeed Al Rassadi, April 2026 - PharmaCalc v1.34</div>'+
+  '<div class="footer">&#169; Saeed Al Rassadi, May 2026 - PharmaCalc v1.34.1</div>'+
   '</div></div>';
 }
 
@@ -3940,7 +3952,7 @@ function feedbackHTML(){
   '<p style="font-size:12px;color:#aaa;margin-bottom:4px">Or email directly</p>'+
   '<a href="mailto:rassadi222@gmail.com?subject=PharmaCalc Feedback" style="font-size:13px;color:#185FA5;font-weight:600;text-decoration:none">rassadi222@gmail.com</a>'+
   '</div>'+
-  '<div class="footer">&#169; Saeed Al Rassadi, April 2026 - PharmaCalc v1.34</div>'+
+  '<div class="footer">&#169; Saeed Al Rassadi, May 2026 - PharmaCalc v1.34.1</div>'+
   '</div></div>';
 }
 
@@ -4112,7 +4124,7 @@ function renalHTML(){
   '</div>'+
   resultHTML+
   '<div class="warn" style="margin-bottom:.85rem">CrCl estimates are approximations. Always use clinical judgment and TDM for critical drugs. Values may be less accurate in neonates, severe malnutrition, or acute kidney injury.</div>'+
-  '<div class="footer">&#169; Saeed Al Rassadi, April 2026 - PharmaCalc v1.34</div>'+
+  '<div class="footer">&#169; Saeed Al Rassadi, May 2026 - PharmaCalc v1.34.1</div>'+
   '</div></div>';
 }
 
@@ -4198,7 +4210,7 @@ function fluidsHTML(){
   '<span style="color:#aaa">Ref: Holliday MA, Segar WE. Pediatrics 1957;19(5):823-32</span>'+
   '</div></div>'+
   '<div class="warn" style="margin-top:.85rem"><strong>Restrict fluids</strong> in heart failure, SIADH, raised ICP, renal failure, or post-operative period. Use <strong>isotonic</strong> maintenance fluids (e.g., 0.9% NaCl + 5% dextrose) - NICE 2015 / NHS Improvement guidance. Hypotonic fluids increase hyponatraemia risk.</div>'+
-  '<div class="footer">&#169; Saeed Al Rassadi, April 2026 - PharmaCalc v1.34</div>'+
+  '<div class="footer">&#169; Saeed Al Rassadi, May 2026 - PharmaCalc v1.34.1</div>'+
   '</div></div>';
 }
 
@@ -4303,7 +4315,7 @@ function bsaHTML(){
   'BSA (m\u00b2) = \u221a (height [cm] \u00d7 weight [kg] / 3600)<br>'+
   '<span style="color:#aaa">Ref: Mosteller RD. N Engl J Med 1987;317(17):1098. Most widely used paediatric formula; closely matches Du Bois.</span>'+
   '</div></div>'+
-  '<div class="footer">&#169; Saeed Al Rassadi, April 2026 - PharmaCalc v1.34</div>'+
+  '<div class="footer">&#169; Saeed Al Rassadi, May 2026 - PharmaCalc v1.34.1</div>'+
   '</div></div>';
 }
 
@@ -4482,7 +4494,7 @@ function ftuHTML(){
     '<button id="btn-calc-ftu" class="send-btn"'+(canCalc?'':' disabled style="opacity:.4;cursor:not-allowed"')+'>Calculate</button>'+
     /* Result */
     resultBox+
-    '<div class="footer">&#169; Saeed Al Rassadi, May 2026 - PharmaCalc v1.34</div>'+
+    '<div class="footer">&#169; Saeed Al Rassadi, May 2026 - PharmaCalc v1.34.1</div>'+
     '</div></div>';
 }
 
@@ -4528,7 +4540,7 @@ function ivpoHTML(){
   '<span class="pill" style="background:#fff0f0;color:#8b1a1a">low &lt; 50%</span></div>'+
   rows+'</div>'+
   '<div class="warn" style="margin-top:.85rem">Always verify the proposed switch against current local antimicrobial guidelines and the patient\'s clinical trajectory. Reduces line-related infections, hospital length of stay, and cost. Avoid switching in deep-seated or CNS infections.</div>'+
-  '<div class="footer">&#169; Saeed Al Rassadi, April 2026 - PharmaCalc v1.34</div>'+
+  '<div class="footer">&#169; Saeed Al Rassadi, May 2026 - PharmaCalc v1.34.1</div>'+
   '</div></div>';
 }
 
@@ -4665,7 +4677,7 @@ function infusionHTML(){
   calcBox+
   '<div class="warn" style="margin-top:.85rem">'+d.note+'</div>'+
   '<div class="warn"><strong>Always double-check infusion calculations independently</strong> before starting. Verify pump settings, drug concentration, and patient weight. Use central line for vasoactive drugs where possible.</div>'+
-  '<div class="footer">&#169; Saeed Al Rassadi, April 2026 - PharmaCalc v1.34</div>'+
+  '<div class="footer">&#169; Saeed Al Rassadi, May 2026 - PharmaCalc v1.34.1</div>'+
   '</div></div>';
 }
 
@@ -4834,7 +4846,7 @@ function neonatalHTML(){
   '</div>'+
   matrixRows+
   '</div>'+
-  '<div class="footer">&#169; Saeed Al Rassadi, April 2026 - PharmaCalc v1.34</div>'+
+  '<div class="footer">&#169; Saeed Al Rassadi, May 2026 - PharmaCalc v1.34.1</div>'+
   '</div></div>';
 }
 
@@ -4947,7 +4959,7 @@ function settingsHTML(){
   '&bull; <strong>Nelson</strong> - Textbook of Pediatrics'+
   '</div></div>'+
 
-  '<div class="footer">&#169; Saeed Al Rassadi, April 2026 - PharmaCalc v1.34</div>'+
+  '<div class="footer">&#169; Saeed Al Rassadi, May 2026 - PharmaCalc v1.34.1</div>'+
   '</div></div>';
 }
 
@@ -4988,7 +5000,7 @@ function modulesHTML(){
   '<div style="flex:1;text-align:center">'+
   '<h1 style="font-size:26px;font-weight:700;letter-spacing:-0.5px">PharmaCalc</h1>'+
   '<p style="font-size:11px;color:#aaa;margin-top:3px">SQUH Pharmacy Department</p></div>'+
-  '<span style="font-size:10px;font-weight:600;color:#aaa;background:#e8f2f0;padding:3px 9px;border-radius:20px;flex-shrink:0">v1.34</span>'+
+  '<span style="font-size:10px;font-weight:600;color:#aaa;background:#e8f2f0;padding:3px 9px;border-radius:20px;flex-shrink:0">v1.34.1</span>'+
   '</div></div></div>'+
   '<div class="wrap">'+
   '<div class="card" style="text-align:center;padding:1.25rem 1rem">'+
@@ -5000,7 +5012,7 @@ function modulesHTML(){
   masterTile+
   phHTML+
   '</div>'+
-  '<div class="footer">&#169; Saeed Al Rassadi, April 2026 - PharmaCalc v1.34</div>'+
+  '<div class="footer">&#169; Saeed Al Rassadi, May 2026 - PharmaCalc v1.34.1</div>'+
   '</div></div>';
 }
 
@@ -5534,7 +5546,7 @@ function bindEvents(){
       var drug=drugEl?drugEl.value:'';
       var typeLabel=state.fbType==='error'?'Drug Error Report':state.fbType==='missing'?'Missing Drug Request':'General Suggestion';
       var drugLine=drug?('Drug: '+drug+'\n'):'';
-      var body=encodeURIComponent('PharmaCalc Feedback\nType: '+typeLabel+'\n'+drugLine+'\n'+msg+'\n\n- Sent from PharmaCalc v1.34');
+      var body=encodeURIComponent('PharmaCalc Feedback\nType: '+typeLabel+'\n'+drugLine+'\n'+msg+'\n\n- Sent from PharmaCalc v1.34.1');
       var subject=encodeURIComponent('PharmaCalc - '+typeLabel);
       window.location.href='mailto:rassadi222@gmail.com?subject='+subject+'&body='+body;
       trackEvent('Feedback','submit',state.fbType);
